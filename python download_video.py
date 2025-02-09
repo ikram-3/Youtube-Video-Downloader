@@ -4,10 +4,8 @@ import time
 
 def download_video(url, resolution='1080p'):
     try:
-        # Create a YouTube object
         yt = YouTube(url)
 
-        # Get the highest resolution stream with both video and audio
         if resolution == '1080p':
             stream = yt.streams.filter(progressive=False, file_extension='mp4', resolution='1080p').first()
             audio_stream = yt.streams.filter(only_audio=True).first()
@@ -26,8 +24,6 @@ def download_video(url, resolution='1080p'):
 
         # Start the timer
         start_time = time.time()
-
-        # Download the video with progress bar
         if resolution == '1080p':
             video_file = stream.download(filename='video.mp4')
             audio_file = audio_stream.download(filename='audio.mp4')
@@ -39,7 +35,6 @@ def download_video(url, resolution='1080p'):
         else:
             stream.download()
 
-        # Calculate the time taken
         end_time = time.time()
         time_taken = end_time - start_time
         print(f"Time taken: {time_taken:.2f} seconds")
